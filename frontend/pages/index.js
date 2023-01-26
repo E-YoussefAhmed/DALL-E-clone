@@ -3,7 +3,7 @@ import Loader from "../components/Loader.jsx";
 import Card from "../components/Card.jsx";
 import FormField from "../components/FormField.jsx";
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   let data;
   try {
     const res = await fetch("https://dall-e-dnhj.onrender.com/api/v1/post", {
