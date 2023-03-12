@@ -3,29 +3,29 @@ import Loader from "../components/Loader.jsx";
 import Card from "../components/Card.jsx";
 import FormField from "../components/FormField.jsx";
 
-export const getStaticProps = async () => {
-  let data;
-  try {
-    const res = await fetch("https://dall-e-dnhj.onrender.com/api/v1/post", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (res.ok) {
-      data = await res.json();
-      setPosts(data.data.reverse());
-      console.log(data.data.reverse());
-    }
-  } catch (error) {
-    console.log(error);
-  }
+// export const getStaticProps = async () => {
+//   let data;
+//   try {
+//     const res = await fetch("https://dall-e-dnhj.onrender.com/api/v1/post", {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+//     if (res.ok) {
+//       data = await res.json();
+//       setPosts(data.data.reverse());
+//       console.log(data.data.reverse());
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
 
-  return {
-    props: { posts: data.data.reverse() },
-    revalidate: 10,
-  };
-};
+//   return {
+//     props: { posts: data.data.reverse() },
+//     revalidate: 10,
+//   };
+// };
 
 const RenderCards = ({ data, title }) => {
   if (data?.length > 0) {
@@ -37,40 +37,40 @@ const RenderCards = ({ data, title }) => {
   );
 };
 
-export default function Home({ posts }) {
-  // const [posts, setPosts] = useState([]);
+export default function Home() {
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState(null);
   const [searchTimeout, setSearchTimeout] = useState(null);
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     setLoading(true);
-  //     let data;
-  //     try {
-  //       const res = await fetch(
-  //         "https://dall-e-dnhj.onrender.com/api/v1/post",
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //         }
-  //       );
-  //       if (res.ok) {
-  //         data = await res.json();
-  //         setPosts(data.data.reverse());
-  //         console.log(data.data.reverse());
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    const getData = async () => {
+      setLoading(true);
+      let data;
+      try {
+        const res = await fetch(
+          "https://dall-e-dnhj.onrender.com/api/v1/post",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (res.ok) {
+          data = await res.json();
+          setPosts(data.data.reverse());
+          console.log(data.data.reverse());
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getData();
+  }, []);
 
   const handleSearchChange = (e) => {
     clearTimeout(searchTimeout);
