@@ -61,7 +61,6 @@ export default function Home() {
         if (res.ok) {
           data = await res.json();
           setPosts(data.data.reverse());
-          console.log(data.data.reverse());
         }
       } catch (error) {
         console.log(error);
